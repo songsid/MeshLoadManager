@@ -1,19 +1,22 @@
 #save txt file to
-QOpenGL_1_1\Demo1.txt
+QOpenGL_1_1\Demo1.txt <br>
+
 QOpenGL_1_1\textureInfo\
 
 #Init
 若要在Tri_Msh呼叫MeshLoadManager 請於此初始化
 .h要宣告MeshLoadManager * meshLoadManager;
-Tri_Mesh::Tri_Mesh()
-{
+
+    Tri_Mesh::Tri_Mesh()
+    {
 	meshLoadManager = new MeshLoadManager;
-}
+    }
 
 
 #1.選面後執行savePatch ，存面的資料
 
-void Tri_Mesh::savePath(std::string fileName){
+
+    void Tri_Mesh::savePath(std::string fileName){
 	fstream file;
 	file.open(fileName, fstream::out);
 	if (file.is_open()) {
@@ -35,11 +38,11 @@ void Tri_Mesh::savePath(std::string fileName){
 		}
 		file.close();
 	}
-}
+    }
 
 
 #2.讀取面的資料,讀完可以在meshLoadManager->textureInfo取得
-void Tri_Mesh::loadPath(std::string fileName){
+    void Tri_Mesh::loadPath(std::string fileName){
 
 	char * temp = (char*)malloc(sizeof(char)* 100000);
 
@@ -49,7 +52,7 @@ void Tri_Mesh::loadPath(std::string fileName){
 	//stringToken
 	meshLoadManager->loadFaceDataFromTxt(temp,0);
 	free(temp);
-}
+    }
 
 #3.一鍵讀Demo.txt檔
 
