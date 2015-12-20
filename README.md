@@ -11,15 +11,22 @@ add _USE_MATH_DEFINES <br>
 若要在Tri_Msh呼叫MeshLoadManager 請於此初始化 <br>
 .h要宣告MeshLoadManager * meshLoadManager;
 
-    Tri_Mesh::Tri_Mesh()
-    {
-	meshLoadManager = new MeshLoadManager;
-    }
-
+	 Tri_Mesh::Tri_Mesh()
+	 {
+		meshLoadManager = new MeshLoadManager;
+	  }
+	
 
 #1.選面後執行savePatch ，存面的資料
 
+	void MainWindow::on_saveFaceButton_clicked()
+	{
+		QString filename = QFileDialog::getSaveFileName(this, tr("Save Text"), "", tr("*.txt"));
+		QFile fileq(filename);
+		std::string a = fileq.fileName().toStdString();
 
+		ui->glFramework->mesh->savePath(a);
+	}
     void Tri_Mesh::savePath(std::string fileName){
 	fstream file;
 	file.open(fileName, fstream::out);
