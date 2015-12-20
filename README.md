@@ -8,7 +8,7 @@ add _USE_MATH_DEFINES <br>
 
 
 #Init
-若要在Tri_Msh呼叫MeshLoadManager 請於此初始化
+若要在Tri_Msh呼叫MeshLoadManager 請於此初始化 <br>
 .h要宣告MeshLoadManager * meshLoadManager;
 
     Tri_Mesh::Tri_Mesh()
