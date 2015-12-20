@@ -52,7 +52,7 @@ add _USE_MATH_DEFINES <br>
     }
 
 
-#2.讀取面的資料,讀完可以在meshLoadManager->textureInfo取得
+#2.讀取面的資料,<br>讀完可以在meshLoadManager->textureInfo取得
     void Tri_Mesh::loadPath(std::string fileName){
 
 	char * temp = (char*)malloc(sizeof(char)* 100000);
