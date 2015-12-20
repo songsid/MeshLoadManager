@@ -1,6 +1,5 @@
 #ifndef MeshLoadManeger_H
 #define MeshLoadManager_H
-#define _USE_MATH_DEFINES
 
 #include <iostream>
 #include <fstream>
@@ -44,7 +43,8 @@ class MeshLoadManager
 	public:
 	
 	std::vector<TextureInfo> textureInfoVector;
-
+	int textureInfoVectorSize;
+	
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
 	char * loadPathTxt(std::string);
