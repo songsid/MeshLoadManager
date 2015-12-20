@@ -34,17 +34,20 @@ class MeshLoadManager
 		std::string name;
 		std::string meshTextureName;
 		std::string meshCoordName;
+
+		std::vector<int> faceHandleIndex;
+
 		double  delta;
 
 		UV uv;
 	};
 	TextureInfo textureInfo;
 
+
 	public:
 	
 	std::vector<TextureInfo> textureInfoVector;
 	int textureInfoVectorSize;
-	
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
 	char * loadPathTxt(std::string);
