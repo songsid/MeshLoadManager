@@ -22,8 +22,11 @@ void MeshLoadManager::printLoadData()
 	}
 	printf("realSize = %d", textureInfoVectorSize);
 	for (int s = 0; s < textureInfoVectorSize; s++){
-		std::cout << "  name :" << textureInfoVector[s].name ;
-		std::cout << "  tName :" << textureInfoVector[s].meshTextureName ;
+		std::cout << "name :" << textureInfoVector[s].name ;
+		printf("\n");
+		std::cout << "TexrureName :" << textureInfoVector[s].meshTextureName ;
+		printf("\n");
+		std::cout << "RotateDelta :" << textureInfoVector[s].delta;
 		printf("\n");
 		int sizeofVector = textureInfoVector[s].uv.vertexHandleIndex.size();
 
@@ -35,15 +38,12 @@ void MeshLoadManager::printLoadData()
 }
 void MeshLoadManager::openFileAndLoadData(std::string fileName)
 {
-	qDebug() << "openfileAndLoadData";
 	std::fstream file;
 	char * temp = (char*)malloc(sizeof(char)* 200000);
-
 
 	file.open(fileName, std::fstream::in);
 	if (file.is_open()){
 		file >> temp;
-
 		loadDemoDataFromTxt(temp);
 
 	}
@@ -73,27 +73,42 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 	char delimiterChars[] = { ',' };
 	char * lastToken = NULL;
 
-	if (textureInfoVector[textureIndex].uv.vertexHandleIndex.size())
+	if (textureInfoVector[textureIndex].uv.vertexHandleIndex.size() || textureInfoVector[textureIndex].faceHandleIndex.size())
 	{
 		textureInfoVector[textureIndex].uv.vertexHandleIndex.clear();
 		textureInfoVector[textureIndex].uv.u.clear();
 		textureInfoVector[textureIndex].uv.v.clear();
+		textureInfoVector[textureIndex].faceHandleIndex.clear();
 	}
 	
-	faceNum = atoi(stringToken(dataString, delimiterChars,&lastToken));//存有幾個面	
-	faceIndex = atoi(stringToken(NULL, delimiterChars,&lastToken));
+
+	faceNum = atoi(stringToken(dataString, delimiterChars,&lastToken));//存有幾個面
+
+	textureInfoVector[textureIndex].faceHandleIndex.resize(faceNum);
+
+	textureInfoVector[textureIndex].delta = atof(stringToken(NULL, delimiterChars, &lastToken));
+
+	faceIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
+
+	textureInfoVector[textureIndex].faceHandleIndex.push_back(faceIndex);//save faceIndex
+
 	while (faceIndex){
 		for (int i = 0; i<3; i++)
 		{
+
 			vectorIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
 			textureInfoVector[textureIndex].uv.vertexHandleIndex.push_back(vectorIndex);
+
+
 			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//存點的cx
 			textureInfoVector[textureIndex].uv.u.push_back(textureCoord);
+
 			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//存點的cy
 			textureInfoVector[textureIndex].uv.v.push_back(textureCoord);
 		}
-
 		faceIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
+		textureInfoVector[textureIndex].faceHandleIndex.push_back(faceIndex); //saveFaceIndex
+
 	}
 }
 
