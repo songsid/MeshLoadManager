@@ -1,7 +1,11 @@
 #save txt file to
 QOpenGL_1_1\Demo1.txt <br>
-
 QOpenGL_1_1\textureInfo\
+
+#error _USE_MATH_DEFINES
+property -> C/C++ -> Preprocessor -> Preprocessor Definitions <br>
+add _USE_MATH_DEFINES <br>
+
 
 #Init
 若要在Tri_Msh呼叫MeshLoadManager 請於此初始化
