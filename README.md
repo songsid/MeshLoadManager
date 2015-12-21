@@ -77,4 +77,13 @@ add _USE_MATH_DEFINES <br>
 	meshLoadManager->printLoadData();
 
 
+#5.一鍵Demo
+
+	void MainWindow::on_DemoButton_clicked()
+	{
+		std::string fileName = "./textureInfo/Demo.txt";
+		meshLoadManager = ui->glFramework->mesh->meshLoadManager;
+		meshLoadManager->openFileAndLoadData(fileName);
+	}
+
 
