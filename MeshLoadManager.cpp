@@ -46,7 +46,6 @@ void MeshLoadManager::openFileAndLoadData(std::string fileName)
 		loadDemoDataFromTxt(temp);
 
 	}
-	printLoadData();
 	free(temp);
 	file.close();
 }
@@ -127,7 +126,11 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 		name = stringToken(NULL, delimiterChars, &lastToken);//fine txt
 		//printf("%s", name);
 		textureInfoVector[i].name = tempString.assign(name);
-		file.open(name, std::fstream::in);
+
+		char* buf = (char*)malloc(sizeof(char)*256);
+		int nWritten = qsnprintf(buf, 256, "./textureInfo/%s", name);
+
+		file.open(buf, std::fstream::in);
 		//去資料夾找名字一樣的文件
 		if (file.is_open()){ //有此檔名並開啟成功
 			file >> c;
@@ -137,6 +140,7 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 		file.close();
 		name = stringToken(NULL, delimiterChars, &lastToken);//bind png
 		textureInfoVector[i].meshTextureName = tempString.assign(name);
+		
 		//std::cout << "textureInfo Vecotr .t name = " << textureInfoVector[i].meshTextureName;
 		//}
 	}	
