@@ -1,6 +1,5 @@
 #ifndef MeshLoadManeger_H
 #define MeshLoadManager_H
-#define _USE_MATH_DEFINES
 
 #include <iostream>
 #include <fstream>
@@ -21,8 +20,8 @@
 
 class MeshLoadManager
 {
-	public:
-		MeshLoadManager();
+public:
+	MeshLoadManager();
 
 	struct TextureInfo
 	{
@@ -32,31 +31,46 @@ class MeshLoadManager
 			std::vector<double> u;
 			std::vector<double> v;
 		};
-		std::string name;
 		std::string meshTextureName;
+		std::string meshTexturePath;
 		std::string meshCoordName;
+		std::string meshCoordPath;
+
+
+		std::vector<int> faceHandleIndex;
+
 		double  delta;
 
 		UV uv;
 	};
 	TextureInfo textureInfo;
 
-	public:
-	
+
+public:
+
 	std::vector<TextureInfo> textureInfoVector;
 
+	std::string modelName;
+	int textureInfoVectorSize;
+	void textureInfoVectorSizeCount();
+
+	void addSingleTextureInfo(TextureInfo);
+
+	
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
 	char * loadPathTxt(std::string);
-	void loadFaceDataFromTxt(char*, int);
 
+	void loadFaceDataFromTxt(char*, int);//load coord txt
 
-	void loadDemoDataFromTxt(char * );
+	void loadDemoDataFromTxt(char *);//load big txt
+
+	void exportDataToDemoTxt(std::string);
 
 	void printLoadData();
 	//
-	char * stringToken(char* , char* ,char ** );
-	char * stringPopBreak(char* , char* );
+	char * stringToken(char*, char*, char **);
+	char * stringPopBreak(char*, char*);
 };
 
 #endif
