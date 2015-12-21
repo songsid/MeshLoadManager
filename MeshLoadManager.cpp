@@ -98,7 +98,6 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 	while (faceIndex){
 		for (int i = 0; i<3; i++)
 		{
-
 			vectorIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
 			textureInfoVector[textureIndex].uv.vertexHandleIndex.push_back(vectorIndex);
 
@@ -110,8 +109,7 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 			textureInfoVector[textureIndex].uv.v.push_back(textureCoord);
 		}
 		faceIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
-		textureInfoVector[textureIndex].faceHandleIndex.push_back(faceIndex); //saveFaceIndex
-
+		if (faceIndex) textureInfoVector[textureIndex].faceHandleIndex.push_back(faceIndex); //
 	}
 	textureInfoVectorSizeCount();
 
