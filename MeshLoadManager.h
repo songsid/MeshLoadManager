@@ -31,7 +31,6 @@ class MeshLoadManager
 			std::vector<double> u;
 			std::vector<double> v;
 		};
-		std::string name;
 		std::string meshTextureName;
 		std::string meshCoordName;
 
@@ -47,7 +46,13 @@ class MeshLoadManager
 	public:
 	
 	std::vector<TextureInfo> textureInfoVector;
+
+	std::string modelName;
 	int textureInfoVectorSize;
+
+
+	void addSingleTextureInfo(TextureInfo);
+
 	void textureInfoVectorSizeCount();
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
