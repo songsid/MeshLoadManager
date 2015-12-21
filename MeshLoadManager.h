@@ -48,6 +48,7 @@ class MeshLoadManager
 	
 	std::vector<TextureInfo> textureInfoVector;
 	int textureInfoVectorSize;
+	void textureInfoVectorSizeCount();
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
 	char * loadPathTxt(std::string);
