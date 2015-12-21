@@ -4,7 +4,6 @@ char delimiterChars[] = { ',' };
 
 MeshLoadManager::MeshLoadManager()
 {
-	qDebug() << "initMLM";
 	textureInfoVector.clear();
 	textureInfoVector.resize(100);
 	textureInfoVectorSize = 0;
