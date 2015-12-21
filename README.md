@@ -86,4 +86,16 @@ add _USE_MATH_DEFINES <br>
 		meshLoadManager->openFileAndLoadData(fileName);
 	}
 
-
+使用 
+	int tIVSize = meshLoadManager->textureInfoVectorSize //int vector size
+	
+	meshLoadManager->textureInfoVector[  ].faceHandleIndex[  ]
+	meshLoadManager->textureInfoVector[  ].uv.vertexHandleIndex[  ]
+	meshLoadManager->textureInfoVector[  ].uv.u[ ]
+	meshLoadManager->textureInfoVector[  ].uv.v[ ]
+	
+	meshLoadManager->textureInfoVector[  ].meshTextureName;
+	meshLoadManager->textureInfoVector[  ].meshCooreName;
+	meshLoadManager->textureInfoVector[  ].delta;
+	
+	meshLoadManager->printLoadData(); //
