@@ -9,16 +9,20 @@ MeshLoadManager::MeshLoadManager()
 	textureInfoVectorSize = 0;
 }
 
-
-void MeshLoadManager::printLoadData()
+void MeshLoadManager::textureInfoVectorSizeCount()
 {
 	int sizeTexture = textureInfoVector.size();
-	 textureInfoVectorSize = 0;
+	textureInfoVectorSize = 0;
 	for (int k = 0; k < sizeTexture; k++)
 	{
 		if (textureInfoVector[k].name.length() > 0)
 			textureInfoVectorSize++;
 	}
+}
+
+void MeshLoadManager::printLoadData()
+{
+
 	printf("realSize = %d", textureInfoVectorSize);
 	for (int s = 0; s < textureInfoVectorSize; s++){
 		std::cout << "name :" << textureInfoVector[s].name ;
@@ -46,6 +50,7 @@ void MeshLoadManager::openFileAndLoadData(std::string fileName)
 		loadDemoDataFromTxt(temp);
 
 	}
+	textureInfoVectorSizeCount();
 	free(temp);
 	file.close();
 }
@@ -108,6 +113,8 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 		textureInfoVector[textureIndex].faceHandleIndex.push_back(faceIndex); //saveFaceIndex
 
 	}
+	textureInfoVectorSizeCount();
+
 }
 
 void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
@@ -128,7 +135,9 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 		textureInfoVector[i].name = tempString.assign(name);
 
 		char* buf = (char*)malloc(sizeof(char)*256);
+		printf("nwri");
 		int nWritten = qsnprintf(buf, 256, "./textureInfo/%s", name);
+		std::cout << "buf = "<<buf;
 
 		file.open(buf, std::fstream::in);
 		//去資料夾找名字一樣的文件
