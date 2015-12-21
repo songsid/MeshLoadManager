@@ -9,13 +9,26 @@ MeshLoadManager::MeshLoadManager()
 	textureInfoVectorSize = 0;
 }
 
+void MeshLoadManager::addSingleTextureInfo(TextureInfo singleTexture)
+{
+	if (textureInfoVectorSize==0)
+	{
+		textureInfoVector[0] = singleTexture;
+	}
+	else
+	{
+		textureInfoVector[textureInfoVectorSize] = singleTexture;
+		textureInfoVectorSize++;
+	}
+}
+
 void MeshLoadManager::textureInfoVectorSizeCount()
 {
 	int sizeTexture = textureInfoVector.size();
 	textureInfoVectorSize = 0;
 	for (int k = 0; k < sizeTexture; k++)
 	{
-		if (textureInfoVector[k].name.length() > 0)
+		if (textureInfoVector[k].meshTextureName.length() > 0 || textureInfoVector[k].meshCoordName.length() > 0)
 			textureInfoVectorSize++;
 	}
 }
@@ -25,8 +38,6 @@ void MeshLoadManager::printLoadData()
 
 	printf("realSize = %d", textureInfoVectorSize);
 	for (int s = 0; s < textureInfoVectorSize; s++){
-		std::cout << "name :" << textureInfoVector[s].name ;
-		printf("\n");
 		std::cout << "TexrureName :" << textureInfoVector[s].meshTextureName ;
 		printf("\n");
 		std::cout << "RotateDelta :" << textureInfoVector[s].delta;
@@ -130,7 +141,7 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 	for (int i = 0; i < textureNum; i++){
 		name = stringToken(NULL, delimiterChars, &lastToken);//fine txt
 		//printf("%s", name);
-		textureInfoVector[i].name = tempString.assign(name);
+		textureInfoVector[i].meshCoordName = tempString.assign(name);
 
 		char* buf = (char*)malloc(sizeof(char)*256);
 		printf("nwri");
