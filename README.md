@@ -1,6 +1,6 @@
 #save txt file to
-QOpenGL_1_1\Demo1.txt <br>
-QOpenGL_1_1\textureInfo\
+
+./textureInfo/ "Demo.txt,座標檔案，圖片檔案都放這裡"
 
 #error _USE_MATH_DEFINES
 property -> C/C++ -> Preprocessor -> Preprocessor Definitions <br>
@@ -71,6 +71,10 @@ add _USE_MATH_DEFINES <br>
 
 	//open, read and push_back to vector
 	meshLoadManager->openFileAndLoadData(fileName);
+	
+#4.印出內容
+
+	meshLoadManager->printLoadData();
 
 
 
