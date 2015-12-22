@@ -34,11 +34,8 @@ public:
 		std::string meshTextureName;
 		std::string meshTexturePath;
 		std::string meshCoordName;
-<<<<<<< HEAD
 		std::string meshCoordPath;
 
-=======
->>>>>>> origin/master
 
 		std::vector<int> faceHandleIndex;
 
@@ -49,30 +46,17 @@ public:
 	TextureInfo textureInfo;
 
 
-<<<<<<< HEAD
 public:
 
-=======
-	public:
-	
->>>>>>> origin/master
 	std::vector<TextureInfo> textureInfoVector;
 
 	std::string modelName;
 	int textureInfoVectorSize;
-<<<<<<< HEAD
 	void textureInfoVectorSizeCount();
 
 	void addSingleTextureInfo(TextureInfo);
 
 	
-=======
-
-
-	void addSingleTextureInfo(TextureInfo);
-
-	void textureInfoVectorSizeCount();
->>>>>>> origin/master
 	void saveFaceDataToTxt(std::string);
 	void openFileAndLoadData(std::string);
 	char * loadPathTxt(std::string);
