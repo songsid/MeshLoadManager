@@ -1,21 +1,32 @@
 #save txt file to
-QOpenGL_1_1\Demo1.txt <br>
 
-QOpenGL_1_1\textureInfo\
+./textureInfo/ "Demo.txt,座標檔案，圖片檔案都放這裡"
+
+#error _USE_MATH_DEFINES
+property -> C/C++ -> Preprocessor -> Preprocessor Definitions <br>
+add _USE_MATH_DEFINES <br>
+
 
 #Init
-若要在Tri_Msh呼叫MeshLoadManager 請於此初始化
+若要在Tri_Msh呼叫MeshLoadManager 請於此初始化 <br>
 .h要宣告MeshLoadManager * meshLoadManager;
 
-    Tri_Mesh::Tri_Mesh()
-    {
-	meshLoadManager = new MeshLoadManager;
-    }
-
+	 Tri_Mesh::Tri_Mesh()
+	 {
+		meshLoadManager = new MeshLoadManager;
+	  }
+	
 
 #1.選面後執行savePatch ，存面的資料
 
+	void MainWindow::on_saveFaceButton_clicked()
+	{
+		QString filename = QFileDialog::getSaveFileName(this, tr("Save Text"), "", tr("*.txt"));
+		QFile fileq(filename);
+		std::string a = fileq.fileName().toStdString();
 
+		ui->glFramework->mesh->savePath(a);
+	}
     void Tri_Mesh::savePath(std::string fileName){
 	fstream file;
 	file.open(fileName, fstream::out);
@@ -41,7 +52,7 @@ QOpenGL_1_1\textureInfo\
     }
 
 
-#2.讀取面的資料,讀完可以在meshLoadManager->textureInfo取得
+#2.讀取面的資料,<br>讀完可以在meshLoadManager->textureInfo取得
     void Tri_Mesh::loadPath(std::string fileName){
 
 	char * temp = (char*)malloc(sizeof(char)* 100000);
@@ -60,6 +71,31 @@ QOpenGL_1_1\textureInfo\
 
 	//open, read and push_back to vector
 	meshLoadManager->openFileAndLoadData(fileName);
+	
+#4.印出內容
+
+	meshLoadManager->printLoadData();
 
 
+#5.一鍵Demo
 
+	void MainWindow::on_DemoButton_clicked()
+	{
+		std::string fileName = "./textureInfo/Demo.txt";
+		meshLoadManager = ui->glFramework->mesh->meshLoadManager;
+		meshLoadManager->openFileAndLoadData(fileName);
+	}
+
+使用 
+	int tIVSize = meshLoadManager->textureInfoVectorSize //int vector size
+	
+	meshLoadManager->textureInfoVector[  ].faceHandleIndex[  ]
+	meshLoadManager->textureInfoVector[  ].uv.vertexHandleIndex[  ]
+	meshLoadManager->textureInfoVector[  ].uv.u[ ]
+	meshLoadManager->textureInfoVector[  ].uv.v[ ]
+	
+	meshLoadManager->textureInfoVector[  ].meshTextureName;
+	meshLoadManager->textureInfoVector[  ].meshCooreName;
+	meshLoadManager->textureInfoVector[  ].delta;
+	
+	meshLoadManager->printLoadData(); //
