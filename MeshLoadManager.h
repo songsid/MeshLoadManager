@@ -50,6 +50,8 @@ public:
 
 	std::vector<TextureInfo> textureInfoVector;
 
+	std::vector<int> faceIteratorIdxVector;
+	
 	std::string modelName;
 	int textureInfoVectorSize;
 	void textureInfoVectorSizeCount();
