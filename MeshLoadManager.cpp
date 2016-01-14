@@ -194,18 +194,7 @@ void MeshLoadManager::exportDataToDemoTxt(std::string fileName)
 
 
 }
-char * MeshLoadManager::openTxtFile(std::string fileName)
-{
-	std::fstream file;
-	char * temp = (char*)malloc(sizeof(char) * 200000);
 
-	file.open(fileName, std::fstream::in);
-	if (file.is_open()){
-		file >> temp;
-	}
-	file.close();
-	return temp;
-}
 void loadFaceIterIdxFromTxt(char * dataString)
 {
 	// 初始化
