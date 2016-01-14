@@ -7,6 +7,9 @@ MeshLoadManager::MeshLoadManager()
 	textureInfoVector.clear();
 	textureInfoVector.resize(100);
 	textureInfoVectorSize = 0;
+	
+	faceIteratorIdxVector.clear();
+	faceIteratorIdxVector.resize(1000);
 }
 
 void MeshLoadManager::addSingleTextureInfo(TextureInfo singleTexture)
@@ -98,7 +101,7 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 	}
 
 
-	faceNum = atoi(stringToken(dataString, delimiterChars, &lastToken));//¦s¦³´X­Ó­±
+	faceNum = atoi(stringToken(dataString, delimiterChars, &lastToken));//å­˜æœ‰å¹¾å€‹é¢
 
 	textureInfoVector[textureIndex].faceHandleIndex.resize(faceNum);
 
@@ -115,10 +118,10 @@ void MeshLoadManager::loadFaceDataFromTxt(char *dataString, int textureIndex)
 			textureInfoVector[textureIndex].uv.vertexHandleIndex.push_back(vectorIndex);
 
 
-			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//¦sÂIªºcx
+			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//å­˜é»çš„cx
 			textureInfoVector[textureIndex].uv.u.push_back(textureCoord);
 
-			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//¦sÂIªºcy
+			textureCoord = atof(stringToken(NULL, delimiterChars, &lastToken));//å­˜é»çš„cy
 			textureInfoVector[textureIndex].uv.v.push_back(textureCoord);
 		}
 		faceIndex = atoi(stringToken(NULL, delimiterChars, &lastToken));
@@ -138,7 +141,7 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 	std::string tempString;
 
 	FILE * fp;
-	textureNum = atoi(stringToken(dataString, delimiterChars, &lastToken));//¦s¦³´X±i¶K¹Ï
+	textureNum = atoi(stringToken(dataString, delimiterChars, &lastToken));//å­˜æœ‰å¹¾å¼µè²¼åœ–
 
 	for (int i = 0; i < textureNum; i++){
 		name = stringToken(NULL, delimiterChars, &lastToken);//fine txt
@@ -153,8 +156,8 @@ void MeshLoadManager::loadDemoDataFromTxt(char* dataString)
 		textureInfoVector[i].meshCoordPath = buf;
 
 		file.open(buf, std::fstream::in);
-		//¥h¸ê®Æ§¨§ä¦W¦r¤@¼Ëªº¤å¥ó
-		if (file.is_open()){ //¦³¦¹ÀÉ¦W¨Ã¶}±Ò¦¨¥\
+		//å»è³‡æ–™å¤¾æ‰¾åå­—ä¸€æ¨£çš„æ–‡ä»¶
+		if (file.is_open()){ //æœ‰æ­¤æª”åä¸¦é–‹å•ŸæˆåŠŸ
 			file >> c;
 			loadFaceDataFromTxt(c, i);
 
@@ -191,6 +194,21 @@ void MeshLoadManager::exportDataToDemoTxt(std::string fileName)
 
 
 }
+void loadFaceIterIdxFromTxt(char *)
+{
+	// åˆå§‹åŒ–
+	int faceIndex = 0;
+	char delimiterChars[] = { ',' };
+	char * lastToken = NULL;
+
+	faceIndex = atoi(stringToken(dataString, delimiterChars, &lastToken));//å­˜faceIteratorIndex
+	if(faceIndex) faceIteratorIdxVector.push_back(faceIndex);
+	
+	while (faceIndex){
+		faceIndex = atoi(stringToken(dataString, delimiterChars, &lastToken));//å­˜faceIteratorIndex
+		if(faceIndex) faceIteratorIdxVector.push_back(faceIndex);
+	}
+}
 
 // string 
 char *  MeshLoadManager::stringToken(char* inputString, char* delimiterChars, char ** lastToken){
@@ -198,7 +216,7 @@ char *  MeshLoadManager::stringToken(char* inputString, char* delimiterChars, ch
 	char *tmp;
 	if (inputString == NULL){
 		inputString = *lastToken;
-		if (inputString == NULL)//¦r¦ê¨S¦³³Ñ¾lªºtoken¤F
+		if (inputString == NULL)//å­—ä¸²æ²’æœ‰å‰©é¤˜çš„tokenäº†
 			return NULL;
 	}
 
