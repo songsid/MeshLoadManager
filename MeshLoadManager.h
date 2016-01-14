@@ -73,6 +73,10 @@ public:
 	//
 	char * stringToken(char*, char*, char **);
 	char * stringPopBreak(char*, char*);
+	
+	// save face iterator idx
+	void loadFaceIterIdxFromTxt(char *);
+	
 };
 
 #endif
