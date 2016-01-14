@@ -99,3 +99,28 @@ add _USE_MATH_DEFINES <br>
 	meshLoadManager->textureInfoVector[  ].delta;
 	
 	meshLoadManager->printLoadData(); //
+	
+# external 存face iterator idx
+
+UI與之前 savePath 相同作法 呼叫 GUA的 saveFaceIteratorIdxPath 
+即可將idx存檔
+
+	void Tri_Mesh::saveFaceIteratorIdxPath(std::string fileName)
+	{
+		fstream file;
+		file.open(fileName, fstream::out);
+		
+		if (file.is_open()) {
+			file << (int)這裡放faceiteratoridx << ',';			
+		}
+		file.close();
+	}
+
+GUA_OM.cpp 使用時
+	
+	char * temp = (char*)malloc(sizeof(char)* 100000);
+	temp = meshLoadManager->loadPathTxt(fileName); // 傳進去要讀的檔名
+	meshLoadManager->loadFaceIterIdxFromTxt(temp); // 執行後 將idx 存進meshLoadManager->faceIteratorIdxVector
+
+
+	
