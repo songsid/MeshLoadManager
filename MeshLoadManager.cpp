@@ -194,7 +194,7 @@ void MeshLoadManager::exportDataToDemoTxt(std::string fileName)
 
 
 }
-void loadFaceIterIdxFromTxt(char *)
+void loadFaceIterIdxFromTxt(char * dataString)
 {
 	// 初始化
 	int faceIndex = 0;
